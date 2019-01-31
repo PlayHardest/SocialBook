@@ -1,25 +1,37 @@
 <head>
-  <title>SocialBook</title>
+	<title>SocialBook</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+	<div class="container">
+		{{>profile}}
+	</div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name ="profile">
+	<div class="row justify-content-around">
+		<div class="col-sm-3">
+			<h1>Social Book</h1>
+		</div>
+	</div>
+	<div class="row justify-content-around">
+		<div class="col-sm-4">
+			<img class = "profilePic" src = "rock.png" alt="rock">
+		</div>
+	</div>
+	<div class="row justify-content-around">
+		<div class="col-sm-3">
+			<h1>Name</h1>
+		</div>
+	</div>
+	<div class ="row justify-content-around">
+		<div class="row justify-content-between">
+			<div class="col-sm-3">
+				<button class = "js-like">Like</button>
+			</div>
+			<div class="col-sm-3">
+				<button class = "js-dislike">Dislike</button>
+			</div>
+		</div>
+	</div>
 </template>
