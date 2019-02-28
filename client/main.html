@@ -4,34 +4,183 @@
 
 <body>
 	<div class="container">
-		{{>profile}}
+		<div class="row justify-content-center">
+			<div class="col-sm-12 text-center">
+				<nav class="navbar navbar-light bg-light">
+					<h1>Social Book</h1>
+				</nav>
+			</div>
+		</div>
+		{{>addUser}}
+		<div class="row justify-content-around">
+			{{>profiles}}
+		</div>
+		
 	</div>
 </body>
 
-<template name ="profile">
-	<div class="row justify-content-around">
-		<div class="col-sm-3">
-			<h1>Social Book</h1>
-		</div>
-	</div>
-	<div class="row justify-content-around">
-		<div class="col-sm-4">
-			<img class = "profilePic" src = "rock.png" alt="rock">
-		</div>
-	</div>
-	<div class="row justify-content-around">
-		<div class="col-sm-3">
-			<h1>Name</h1>
-		</div>
-	</div>
-	<div class ="row justify-content-around">
-		<div class="row justify-content-between">
-			<div class="col-sm-3">
-				<button class = "js-like">Like</button>
+
+<template name ="addUser">
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+		Add a new user
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	    		<div class="modal-header">
+	        		<h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		
+	      		<div class="modal-body">
+	      			<form>
+						<div class="form-group">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">First Name</span>
+								</div>
+								<input type="text" name="firstName" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Last Name</span>
+								</div>
+								<input type="text" name="lastName" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Profile Image</span>
+								</div>
+								<input type="text" name="Image" class="form-control" placeholder="Image" aria-describedby="basic-addon1">
+							</div>
+
+					  	</div>
+					</form>
+	      		</div>
+				<div class="modal-footer">
+		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	    	    	<button type="button" class="btn btn-primary js-save">Submit</button>
+				</div>
 			</div>
-			<div class="col-sm-3">
-				<button class = "js-dislike">Dislike</button>
+		</div>
+	</div>
+</template>
+
+<template name ="profiles">
+	{{#each profAll}}<!-- starts the html text that you want to repeat -->
+	<div id={{_id}} class="col-4">	
+		<div class="row justify-content-around">
+			<div class="col-sm-12 text-center">
+				<button type="button" class="btn btn-link" data-dismiss="modal" data-toggle="modal" data-target="#infoModal{{_id}}">
+					<img class = "profilePic" src = "{{Image}}" alt="rock">
+				</button>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-sm-4 text-center">
+				{{firstName}} {{lastName}}
+			</div>
+		</div>
+		<div class ="row justify-content-center">
+			<div class="row justify-content-between">
+				<div class="col-sm-4 text-center">
+					<button type="button" class="btn btn-outline-success js-like">
+						<i class="zmdi zmdi-thumb-up"></i>  {{Likes}}
+					</button>
+				</div>
+				<div class="col-sm-4 text-center">
+					<button type="button" class="btn btn-outline-danger js-dislike">
+						<i class="zmdi zmdi-thumb-down"></i>  {{Dislikes}}
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- USER INFO MODAL -->
+		<div class="modal fade" id="infoModal{{_id}}" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+		    	<div class="modal-content">
+		    		<div class="modal-header">
+		        		<h5 class="modal-title" id="infoModalLabel">{{firstName}} {{lastName}}'s Details <a href="#" class="tooltip-test" title="Edit"><i class="js-edit zmdi zmdi-edit" data-dismiss="modal" data-toggle="modal" data-target="#editModal{{_id}}"></i></a>   <a href="#" class="tooltip-test" title="Delete"><i class="zmdi zmdi-delete js-delete" data-dismiss="modal"></i></a></h5>
+		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+		        		</button>
+		      		</div>
+		      		
+		      		<div class="modal-body">
+	      				<div class = "row justify-content-center">
+	      					<div class="col-7 greentext">
+	      						<img class = "profilePic" src = "{{Image}}" alt="rock">
+	      					</div>
+	      					<div class="col-5">
+	      						Name : {{firstName}} {{lastName}}<br>
+	      						Likes : {{Likes}}<br>
+	      						Dislikes : {{Dislikes}}<br>
+	      					</div>
+	      				</div>
+		      		</div>
+					<div class="modal-footer">
+			        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        	<button type="button" class="btn btn-primary js-edit" data-dismiss="modal" data-toggle="modal" data-target="#editModal{{_id}}">Edit</button>
+		    	    	<button type="button" class="btn btn-primary js-delete" data-dismiss="modal">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- EDIT INFO MODAL -->
+		<div class="modal fade" id="editModal{{_id}}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	    		<div class="modal-header">
+	        		<h5 class="modal-title" id="editModalLabel">Edit {{firstName}} {{lastName}}'s Info</h5>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+	      		
+	      		<div class="modal-body">
+	      			<form>
+						<div class="form-group">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">First Name</span>
+								</div>
+								<input type="text" name="firstName" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Last Name</span>
+								</div>
+								<input type="text" name="lastName" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Profile Image</span>
+								</div>
+								<input type="text" name="Image" class="form-control" placeholder="Image" aria-describedby="basic-addon1">
+							</div>
+
+					  	</div>
+					</form>
+	      		</div>
+				<div class="modal-footer">
+		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	    	    	<button type="button" class="btn btn-primary js-saveEdits">Edit</button>
+				</div>
 			</div>
 		</div>
 	</div>
+
+	</div>
+	{{/each}}<!-- ends the html text that you want to repeat -->
 </template>
