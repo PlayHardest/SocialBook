@@ -58,7 +58,14 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1">Profile Image</span>
 								</div>
-								<input type="text" name="Image" class="form-control" placeholder="Image" aria-describedby="basic-addon1">
+								<input type="text" name="Image1" class="form-control" placeholder="Primary Image" aria-describedby="basic-addon1">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Secondary Image</span>
+								</div>
+								<input type="text" name="Image2" class="form-control" placeholder="Secondary Image" aria-describedby="basic-addon1">
 							</div>
 
 					  	</div>
@@ -79,7 +86,7 @@
 		<div class="row justify-content-around">
 			<div class="col-sm-12 text-center">
 				<button type="button" class="btn btn-link" data-dismiss="modal" data-toggle="modal" data-target="#infoModal{{_id}}">
-					<img class = "profilePic" src = "{{Image}}" alt="rock">
+					<img class = "profilePic" src = "{{Image1}}" alt="rock">
 				</button>
 			</div>
 		</div>
@@ -116,8 +123,8 @@
 		      		
 		      		<div class="modal-body">
 	      				<div class = "row justify-content-center">
-	      					<div class="col-7 greentext">
-	      						<img class = "profilePic" src = "{{Image}}" alt="rock">
+	      					<div class="col-7 ">
+	      						<img class = "profilePic" src = "{{Image2}}" alt="rock">
 	      					</div>
 	      					<div class="col-5">
 	      						Name : {{firstName}} {{lastName}}<br>
@@ -167,7 +174,14 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1">Profile Image</span>
 								</div>
-								<input type="text" name="Image" class="form-control" placeholder="Image" aria-describedby="basic-addon1">
+								<input type="text" name="Image1" class="form-control" placeholder="Primary Image" aria-describedby="basic-addon1">
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Secondary Image</span>
+								</div>
+								<input type="text" name="Image2" class="form-control" placeholder="Secondary Image" aria-describedby="basic-addon1">
 							</div>
 
 					  	</div>

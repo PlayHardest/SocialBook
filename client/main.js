@@ -40,9 +40,13 @@ Template.profiles.events({//template events define and customize user interactio
   		var modalname = '#editModal' + this._id
 		var fname = $(modalname + ' input[name="firstName"]').val()
 		var lname = $(modalname + ' input[name="lastName"]').val()
-		var img = $(modalname + ' input[name="Image"]').val()
+		var img = $(modalname + ' input[name="Image1"]').val()
+		var img2 = $(modalname + ' input[name="Image2"]').val()
 		if(img ==""){
-			img=userDB.findOne({'_id':this._id}).Image;
+			img=userDB.findOne({'_id':this._id}).Image1;
+		}
+		if(img2 ==""){
+			img2=userDB.findOne({'_id':this._id}).Image2;
 		}
 		if(fname ==""){
 			fname=userDB.findOne({'_id':this._id}).firstName;
@@ -50,12 +54,12 @@ Template.profiles.events({//template events define and customize user interactio
 		if(lname ==""){
 			lname=userDB.findOne({'_id':this._id}).lastName;
 		}
-		console.log("The name is",fname,lname);
 		$(modalname + ' input[name="firstName"]').val('')
 		$(modalname + ' input[name="lastName"]').val('')
-		$(modalname + ' input[name="Image"]').val('')
+		$(modalname + ' input[name="Image1"]').val('')
+		$(modalname + ' input[name="Image2"]').val('')
 		$(modalname).modal('hide');
-		userDB.update({"_id":this._id}, {$set:{'firstName':fname, 'lastName':lname, 'Image':img}});
+		userDB.update({"_id":this._id}, {$set:{'firstName':fname, 'lastName':lname, 'Image1':img, 'Image2':img2}});
 	},
 });
 
@@ -63,14 +67,19 @@ Template.addUser.events({
 	'click .js-save'(event, instance) {
 		var fname = $('#exampleModal input[name="firstName"]').val()
 		var lname = $('#exampleModal input[name="lastName"]').val()
-		var img = $('#exampleModal input[name="Image"]').val()
+		var img = $('#exampleModal input[name="Image1"]').val()
 		if(img ==""){
 			img="rock.png"
 		}
+		var img2 = $('#exampleModal input[name="Image2"]').val()
+		if(img2 ==""){
+			img2="rock.png"
+		}
 		$('#exampleModal input[name="firstName"]').val('')
 		$('#exampleModal input[name="lastName"]').val('')
-		$('#exampleModal input[name="Image"]').val('')
+		$('#exampleModal input[name="Image1"]').val('')
+		$('#exampleModal input[name="Image2"]').val('')
 		$('#exampleModal').modal('hide');
-		userDB.insert({'firstName':fname, 'lastName':lname, 'Image':img, 'Likes':0, 'Dislikes':0 });
+		userDB.insert({'firstName':fname, 'lastName':lname, 'Image1':img, 'Image2':img2, 'Likes':0, 'Dislikes':0 });
 	},
 }); 
